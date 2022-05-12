@@ -56,3 +56,10 @@ class Graph:
 
         return output
         
+    def new_activity(self, targets):
+        for each_target in targets:
+            for each_node in self.nodes:
+                if each_node.value == each_target[0]:
+                    each_node.receive(each_target[1])
+
+    
