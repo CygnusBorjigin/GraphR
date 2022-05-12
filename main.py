@@ -9,4 +9,4 @@ test_edge = [Edge(np.random.randint(1, 11), np.random.randint(1, 11), np.random.
 
 test_graph = Graph(test_node, test_edge)
 
-print(test_graph.graph_info(node_style="Full", edge_style="None", output_style="dict"))
+print(test_graph.graph_info(node_style="Full", edge_style="Full", output_style="dict")["edges"]["3"])

@@ -23,23 +23,36 @@ class Graph:
             return (all_node, all_edge)
         elif output_style == "dict":
             output = {
-                "nodes" : all_node,
+                "nodes" : {},
                 "edges" : {}
             }
+            # node info 
+            if node_style == "Full":
+                for each_node in all_node:               
+                    output["nodes"][str(each_node[0])] = {
+                        "threshold" : each_node[1],
+                        "activity" : each_node[2],
+                        "active" : each_node[3]
+                    }
+            elif node_style == "None":
+                output["nodes"] = all_node
 
-            for each_edge_index in range(len(self.edges)):
-                if edge_style == "None":
+            # formate edge info
+            if edge_style == "None":
+                for each_edge_index in range(len(self.edges)):
                     output["edges"][str(each_edge_index)] = {
                         "node1" : self.edges[each_edge_index].node1,
                         "node2" : self.edges[each_edge_index].node2
                     }
-                elif edge_style == "Full":
+            elif edge_style == "Full":
+                for each_edge_index in range(len(all_edge)):
                     output["edges"][str(each_edge_index)] = {
-                        "node1" : self.edges[each_edge_index].node1,
-                        "node2" : self.edges[each_edge_index].node2,
-                        "weight" : self.edges[each_edge_index].weight,
-                        "capacity" : self.edges[each_edge_index].capacity
+                        "node1" : all_edge[each_edge_index][0],
+                        "node2" : all_edge[each_edge_index][1],
+                        "weight" : all_edge[each_edge_index][2],
+                        "capacity" : all_edge[each_edge_index][3]
                     }
+
 
         return output
         
