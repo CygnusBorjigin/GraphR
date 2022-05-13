@@ -5,6 +5,18 @@ class Graph:
     def __init__(self, nodes, edges):
         self.nodes = nodes
         self.edges = edges
+        self.first_neighborhood = {}
+        self.__build_first_neighbor()
+
+    def __build_first_neighbor(self):
+        # initialize the hash
+        for each_node in self.nodes:
+            self.first_neighborhood[str(each_node.value)] = []
+        
+        # populate the hash
+        for each_edge in self.edges:
+            if each_edge.node2 not in self.first_neighborhood[str(each_edge.node1)]:
+                self.first_neighborhood[str(each_edge.node1)].append(each_edge.node2)
 
     def graph_info(self, node_style="None", edge_style="None", output_style="None"):
         # form the representation
@@ -62,4 +74,8 @@ class Graph:
                 if each_node.value == each_target[0]:
                     each_node.receive(each_target[1])
 
-    
+    def static(self):
+        for each_node in self.nodes:
+            if each_node.active:
+                return False
+        return True
